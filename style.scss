@@ -1,0 +1,27 @@
+.uploader {
+    a { cursor: pointer; }
+    
+    .browse {
+    	color: rgb(8, 163, 27);
+		font-size: 12px;
+    }
+
+    .list {
+    	list-style: none;
+    	li {
+    		width: 30%;
+    		.file-meta {
+    			span {
+    				margin: 2px;
+    				a {
+    					font-size: small;
+    				}
+    			}
+    		}
+    		progress {
+    			height: 2px;
+    			width: 100%;
+    		}
+    	}
+    }
+}
