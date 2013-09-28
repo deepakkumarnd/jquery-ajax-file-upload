@@ -1,16 +1,24 @@
-.uploader a {
-  cursor: pointer; }
-.uploader .browse {
-  color: #08a31b;
-  font-size: 12px; }
-.uploader .list {
-  list-style: none; }
-  .uploader .list li {
-    width: 30%; }
-    .uploader .list li .file-meta span {
-      margin: 2px; }
-      .uploader .list li .file-meta span a {
-        font-size: small; }
-    .uploader .list li progress {
-      height: 2px;
-      width: 100%; }
+.upload li {
+  border-top: 1px dashed #aaaaaa;
+  list-style: none;
+  padding: 4px; }
+  .upload li:last-child {
+    border-bottom: 1px dashed #aaaaaa; }
+.upload .progressbar {
+  background: #aaaaaa;
+  float: right;
+  height: 5px;
+  width: 100px; }
+  .upload .progressbar .progress {
+    background-color: #1cad7e;
+    height: 10px; }
+.upload .browse {
+  color: #1cad7e;
+  cursor: pointer;
+  font-size: 15px;
+  text-decoration: underline; }
+.upload .filemeta {
+  color: #aaaaaa;
+  font-size: 14px; }
+  .upload .filemeta .fileinfo .delete-link {
+    color: #307ea9; }

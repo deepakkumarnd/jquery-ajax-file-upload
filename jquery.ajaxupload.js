@@ -12,10 +12,10 @@
         this.opts = opts;
         this.upload = __bind(this.upload, this);
         this.handleFileSelection = __bind(this.handleFileSelection, this);
-        console.log(this.opts);
         browse = "<a href='javascript:void(0);' class='" + this.opts.browse_class + "'>" + this.opts.browse_text + "</a>";
         filefield = "<input type='file' hidden multiple=" + this.opts.multiple + "></input>";
         list = "<ul class='" + this.opts.list_class + "'></ul>";
+        this.container.addClass("upload");
         this.container.append(browse);
         this.container.append(filefield);
         this.container.append(list);
@@ -35,8 +35,7 @@
             url: delete_link.data("path"),
             type: "DELETE",
             success: function(data) {
-              console.log("success");
-              return delete_link.parent().remove();
+              return delete_link.closest("li").remove();
             },
             error: function(data) {
               return console.log("error");
@@ -51,7 +50,7 @@
         files = evt.target.files;
         return $(files).each(function(i, file) {
           var item;
-          item = "<li><div><span>" + file.name + "</span>&nbsp;<span>" + (_this.toSize(file.size)) + "</span></div><div><progress hidden></progress></div></li>";
+          item = "<li><div class='progressbar'><div class='progress' style='width:0%;'></div></div>  <div class='filemeta'><div class='filename'>" + file.name + "</div>  <div class='fileinfo'><span>" + (_this.toSize(file.size)) + "</span>&nbsp;&mdash;&nbsp;</div></div></div></li>";
           _this.list.append(item);
           return _this.upload(file, _this.list.children().last());
         });
@@ -74,8 +73,7 @@
           _this = this;
         xhr = new XMLHttpRequest();
         fd = new FormData();
-        progress = li.children().last().children().first();
-        progress.show();
+        progress = li.find(".progress");
         fd.append("filename", escape(file.name));
         fd.append("size", file.size);
         fd.append("file", file);
@@ -88,9 +86,8 @@
           }
         };
         xhr.upload.onprogress = function(e) {
-          progress.show();
           if (e.lengthComputable) {
-            return progress.val(e.loaded / e.total);
+            return progress.css("width", (e.loaded / e.total * 100) + "%");
           }
         };
         return xhr.send(fd);
@@ -101,8 +98,9 @@
         response = JSON.parse(response_text);
         if (response.delete_path) {
           delete_link = "<a id='" + response.id + "' class='delete-link' data-path='" + response.delete_path + "' href='javascript:void(0);' >delete</a>";
-          return li.append(delete_link);
+          li.find(".fileinfo").append(delete_link);
         }
+        return this.opts.callback(response);
       };
 
       return Uploader;
@@ -118,7 +116,10 @@
       browse_class: "browse",
       list_class: "list",
       progress_class: "progressbar",
-      multiple: true
+      multiple: true,
+      callback: function(data) {
+        return console.log("no callbacks");
+      }
     };
   })(jQuery);
 
