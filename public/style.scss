@@ -1,0 +1,56 @@
+$theme-color:          #1cad7e; // dark green
+$lighter-text-color:   #C0C0C0;
+
+.upload {
+  .droparea {
+    display: block;
+    border: 1px dashed $lighter-text-color;
+    width: 200px;
+    min-height: 150px;
+    text-align: center;
+    background-color: rgb(252, 247, 247);
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  li {
+    border-top: 1px dashed $lighter-text-color;
+    padding: 4px;
+    list-style: none;
+
+    &:last-child {
+      border-bottom: 1px dashed $lighter-text-color;
+    }
+  }
+
+  .progressbar {
+      background: $lighter-text-color;
+      float: right;
+      min-height: 2px;
+      width: 100px;
+
+     .progress {
+        background-color: $theme-color;
+        height: 10px;
+     }
+  }
+
+  .browse {
+    color: $theme-color;
+    cursor: pointer;
+    font-size: 15px;
+    text-decoration: underline;
+  }
+
+  .filemeta {
+    color: $lighter-text-color;
+    font-size: 14px;
+    .filename {}
+    .fileinfo {
+      span {}
+      .delete-link { color: #307ea9; }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+.upload .droparea {
+  display: block;
+  border: 1px dashed silver;
+  width: 200px;
+  min-height: 150px;
+  text-align: center;
+  background-color: #fcf7f7; }
+.upload ul {
+  list-style: none; }
+.upload li {
+  border-top: 1px dashed silver;
+  padding: 4px;
+  list-style: none; }
+  .upload li:last-child {
+    border-bottom: 1px dashed silver; }
+.upload .progressbar {
+  background: silver;
+  float: right;
+  min-height: 2px;
+  width: 100px; }
+  .upload .progressbar .progress {
+    background-color: #1cad7e;
+    height: 10px; }
+.upload .browse {
+  color: #1cad7e;
+  cursor: pointer;
+  font-size: 15px;
+  text-decoration: underline; }
+.upload .filemeta {
+  color: silver;
+  font-size: 14px; }
+  .upload .filemeta .fileinfo .delete-link {
+    color: #307ea9; }

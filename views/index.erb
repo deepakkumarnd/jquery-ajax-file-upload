@@ -1,0 +1,27 @@
+<html>
+  <head>
+  <title>jQuery Ajax Upload Plugin</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="jquery2.min.js"></script>
+    <script type="text/javascript" src="jquery.ajaxupload.js"></script>
+  </head>
+
+  <body>
+    <h1>jQuery Ajax Upload Plugin</h1>
+
+    <div class="section">
+      <h2>Default</h2>
+      <div class="upload-1"></div>
+    </div>
+
+    <div class="section">
+      <h2>Drag and Drop</h2>
+      <div class="upload-2"></div>
+    </div>
+
+    <script>
+      $(".upload-1").ajaxUpload();
+      $(".upload-2").ajaxUpload({ drag_and_drop: true });
+    </script>
+  </body>
+</html>
