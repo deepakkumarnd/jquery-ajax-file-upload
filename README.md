@@ -62,11 +62,11 @@ eg:
     
 ## How to test it?
 
-install ruby
-install sinatra
-clone the repo
-cd to the repo directory
-run the command
+1. install ruby
+2. install sinatra
+3. clone the repo
+4. cd to the repo directory
+5. run the command
      ruby app.rb
 
 now just go to the url http://localhost:4567/
