@@ -1,112 +1,111 @@
-(($) ->
-  class Uploader
-    constructor: (@container, @opts) ->
-      browse    = "<a href='javascript:void(0);' class='#{@opts.browse_class}'>#{@opts.browse_text}</a>"
-      filefield = "<input type='file' hidden multiple=#{@opts.multiple}></input>"
-      list      = "<ul class='#{@opts.list_class}'></ul>"
-      choose_file = browse
-      choose_file = "<div class='droparea'>#{choose_file}</div>" if @opts.drag_and_drop
-      choose_section = "#{choose_file}#{filefield}#{list}"
+class Uploader
+  constructor: (@container, @opts) ->
+    browse    = "<a href='javascript:void(0);' class='#{@opts.browse_class}'>#{@opts.browse_text}</a>"
+    filefield = "<input type='file' hidden multiple=#{@opts.multiple}></input>"
+    list      = "<ul class='#{@opts.list_class}'></ul>"
+    choose_file = browse
+    choose_file = "<div class='droparea'>#{choose_file}</div>" if @opts.drag_and_drop
+    choose_section = "#{choose_file}#{filefield}#{list}"
 
-      @container.addClass("upload")
-      @container.append(choose_section)
+    @container.addClass("upload")
+    @container.append(choose_section)
 
-      nodes      = @container.children()
-      @browse    = @container.find(".browse")
-      @filefield = @container.find("input[type=file]")
-      @list      = @container.find("ul")
+    nodes      = @container.children()
+    @browse    = @container.find(".browse")
+    @filefield = @container.find("input[type=file]")
+    @list      = @container.find("ul")
 
-      if @opts.drag_and_drop
-        @droparea  = @container.find(".droparea")
-        @droparea.bind "dragover", @handleDragOver
-        @droparea.bind "drop", @handleFileSelection
+    if @opts.drag_and_drop
+      @droparea  = @container.find(".droparea")
+      @droparea.bind "dragover", @handleDragOver
+      @droparea.bind "drop", @handleFileSelection
 
-      @browse.bind "click", =>
-        @filefield.click()
-      @filefield.bind "change", @handleFileSelection
+    @browse.bind "click", =>
+      @filefield.click()
+    @filefield.bind "change", @handleFileSelection
 
-      $(".list").on "click", ".delete-link", (evt) ->
-        evt.preventDefault()
-        delete_link = $(evt.target)
-        $.ajax
-          url: delete_link.data("path")
-          type: "DELETE"
-          success: (data) ->
-            delete_link.closest("li").remove()
-          error: (data) ->
-            console.log "error"
-
-    handleDragOver: (evt) =>
-      evt.stopPropagation()
+    $(".list").on "click", ".delete-link", (evt) ->
       evt.preventDefault()
-      #evt.dataTransfer.dropEffect = "copy"
+      delete_link = $(evt.target)
+      $.ajax
+        url: delete_link.data("path")
+        type: "DELETE"
+        success: (data) ->
+          delete_link.closest("li").remove()
+        error: (data) ->
+          console.log "error"
 
-    handleFileSelection: (evt) =>
-      evt.stopPropagation()
-      evt.preventDefault()
-      files = evt.target.files
+  handleDragOver: (evt) =>
+    evt.stopPropagation()
+    evt.preventDefault()
+    evt.originalEvent.dataTransfer.dropEffect = "copy"
 
-      $(files).each (i, file) =>
-        item = """<li><div class='progressbar'><div class='progress' style='width:0%;'></div></div>
-                  <div class='filemeta'><div class='filename'>#{file.name}</div>
-                  <div class='fileinfo'><span>#{@toSize(file.size)}</span>&nbsp;&mdash;&nbsp;</div></div></div></li>"""
-        @list.append(item)
-        @upload(file, @list.children().last())
+  handleFileSelection: (evt) =>
+    evt.stopPropagation()
+    evt.preventDefault()
 
-    toSize: (size) ->
-      units = ["KB", "MB", "GB"]
-      unit  = "BYTES"
+    files = evt.target.files || evt.originalEvent.dataTransfer.files
 
-      while size > 1000
-        size = size/1000.0
-        unit = units.shift()
+    $(files).each (i, file) =>
+      item = """<li><div class='progressbar'><div class='progress' style='width:0%;'></div></div>
+                <div class='filemeta'><div class='filename'>#{file.name}</div>
+                <div class='fileinfo'><span>#{@toSize(file.size)}</span>&nbsp;&mdash;&nbsp;</div></div></div></li>"""
+      @list.append(item)
+      @upload(file, @list.children().last())
 
-      size = Math.round(size)
-      size + " " + unit
+  toSize: (size) ->
+    units = ["KB", "MB", "GB"]
+    unit  = "BYTES"
 
-    upload: (file, li) =>
-      xhr = new XMLHttpRequest()
-      fd  = new FormData()
-      progress = li.find(".progress")
+    while size > 1000
+      size = size/1000.0
+      unit = units.shift()
 
-      fd.append "filename", escape(file.name)
-      fd.append "size", file.size
-      fd.append "file", file
+    size = Math.round(size)
+    size + " " + unit
 
-      xhr.open "POST", @opts.upload_path, true
+  upload: (file, li) =>
+    xhr = new XMLHttpRequest()
+    fd  = new FormData()
+    progress = li.find(".progress")
 
-      xhr.onload = =>
-        if xhr.status == 200
-          @processResponse(xhr.responseText, li)
-        else
-          console.log "failed #{xhr.status}"
+    fd.append "filename", escape(file.name)
+    fd.append "size", file.size
+    fd.append "file", file
 
-      xhr.upload.onprogress = (e) ->
-        if e.lengthComputable
-          progress.css("width", (e.loaded/e.total*100) + "%")
+    xhr.open "POST", @opts.upload_path, true
 
-      xhr.send(fd)
+    xhr.onload = =>
+      if xhr.status == 200
+        @processResponse(xhr.responseText, li)
+      else
+        console.log "failed #{xhr.status}"
 
-    processResponse: (response_text, li) ->
-      response = JSON.parse(response_text)
-      if response.delete_path
-        delete_link = "<a id='#{response.id}' class='delete-link' data-path='#{response.delete_path}' href='javascript:void(0);' >delete</a>"
-        li.find(".fileinfo").append(delete_link)
+    xhr.upload.onprogress = (e) ->
+      if e.lengthComputable
+        progress.css("width", (e.loaded/e.total*100) + "%")
 
-      @opts.callback(response)
+    xhr.send(fd)
 
-  $.fn.ajaxUpload = (options) ->
-    options = $.extend {}, $.fn.ajaxUpload.default_options, options
-    new Uploader(this, options)
+  processResponse: (response_text, li) ->
+    response = JSON.parse(response_text)
+    if response.delete_path
+      delete_link = "<a id='#{response.id}' class='delete-link' data-path='#{response.delete_path}' href='javascript:void(0);' >delete</a>"
+      li.find(".fileinfo").append(delete_link)
 
-  $.fn.ajaxUpload.default_options =
-    upload_path: "/"
-    browse_text: "browse"
-    browse_class: "browse"
-    list_class: "list"
-    progress_class: "progressbar"
-    drag_and_drop: false
-    multiple: true
-    callback: (data) ->
-      console.log("no callbacks")
-  ) jQuery
+    @opts.callback(response)
+
+$.fn.ajaxUpload = (options) ->
+  options = $.extend {}, $.fn.ajaxUpload.default_options, options
+  new Uploader(this, options)
+
+$.fn.ajaxUpload.default_options =
+  upload_path: "/"
+  browse_text: "browse"
+  browse_class: "browse"
+  list_class: "list"
+  progress_class: "progressbar"
+  drag_and_drop: false
+  multiple: true
+  callback: (data) ->
+    console.log("no callbacks")
