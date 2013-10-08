@@ -20,6 +20,7 @@ Add the following code in your javascript
     upload_path: "/"              // to which the file is uploaded POST request
     browse_text: "browse"         // text on the browse link
     multiple: true                // choose multiple files
+    drag_and_drop: true           // add drag and drop support
 
 
 Ajax upload comes with a simple scss (css) file you are free to override the default styling.
