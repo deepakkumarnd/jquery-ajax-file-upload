@@ -21,6 +21,7 @@ Add the following code in your javascript
     browse_text: "browse"         // text on the browse link
     multiple: true                // choose multiple files
     drag_and_drop: true           // add drag and drop support
+    callback:  function(data) {}  // do something after each file upload, the data will be the data returned form server.
 
 
 Ajax upload comes with a simple scss (css) file you are free to override the default styling.
