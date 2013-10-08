@@ -59,3 +59,14 @@ eg:
             <div class="uploader"></div>
         </body>
     </html>
+    
+## How to test it?
+
+install ruby
+install sinatra
+clone the repo
+cd to the repo directory
+run the command
+     ruby app.rb
+
+now just go to the url http://localhost:4567/
