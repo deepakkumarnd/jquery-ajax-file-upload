@@ -21,27 +21,30 @@ Add the following code in your javascript
     browse_text: "browse"         // text on the browse link
     multiple: true                // choose multiple files
     drag_and_drop: true           // add drag and drop support
+    preview : true                // add a preview for the selected image file
     callback:  function(data) {}  // do something after each file upload, the data will be the data returned form server.
 
 
 Ajax upload comes with a simple scss (css) file you are free to override the default styling.
 A new li is added for each selected file. The DOM structure created by the plugin is as follows
 
-    <div class="uploader upload">
-         <a href="javascript:void(0);" class="browse">browse</a>
-         <input type="file" hidden="" multiple="true">
-         <ul class="list">
-             <li>
+    <div class="upload-3 upload">
+        <a href="javascript:void(0);" class="browse">browse</a>
+        <input type="file" hidden="" multiple="true">
+        <ul class="list">
+            <li>
                 <div class="progressbar"><div class="progress" style="width: 100%;"></div></div>
-                <div class="filemeta">
-                     <div class="filename">559044_472813522756703_1821444898_n.jpg</div>
-                     <div class="fileinfo"><span>69 KB</span>&nbsp;—&nbsp;<a id="12121" class="delete-link" data-path="/profile_photo/12121" href="javascript:void(0);">delete</a></div>
+                <div class="fileinfo">
+                    <span class="preview"><img src="..."></span>
+                    <span class="filename">IMG_20130913_213045.jpg</span>
+                    <span>218 KB</span>&nbsp;—&nbsp;
+                    <a id="12121" class="delete-link" data-path="/delete" href="javascript:void(0);">delete</a>
                 </div>
-             </li>
-         </ul>
+            </li>
+            ...
+            ...
+        </ul>
     </div>
-
-
 
 eg:
 
@@ -61,14 +64,16 @@ eg:
             <div class="uploader"></div>
         </body>
     </html>
-    
+
 ## How to test it?
 
-1. install ruby
-2. install sinatra
+1. Install ruby
+2. Install sinatra
+    gem install sinatra
 3. clone the repo
+    git clone git@github.com:42races/jquery-ajax-file-upload.git
 4. cd to the repo directory
 5. run the command
      ruby app.rb
 
-now just go to the url http://localhost:4567/
+now just go to the url http://localhost:4567/ on your browser

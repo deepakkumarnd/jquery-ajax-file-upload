@@ -19,9 +19,16 @@
       <div class="upload-2"></div>
     </div>
 
+    <div class="section">
+      <h2>Preview</h2>
+      <p>For images you can set a preview</p>
+      <div class="upload-3"></div>
+    </div>
+
     <script>
       $(".upload-1").ajaxUpload();
       $(".upload-2").ajaxUpload({ drag_and_drop: true });
+      $(".upload-3").ajaxUpload({ preview: true });
     </script>
   </body>
 </html>
