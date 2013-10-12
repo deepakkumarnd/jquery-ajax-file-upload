@@ -18,5 +18,8 @@
       "url": "http://opensource.org/licenses/MIT"
     }
   ],
+  "dependencies": {
+        "jquery": ">=1.5"
+  },
   "keywords": ["upload", "ajaxupload", "jquery-ajax-upload", "multiupload", "drag-and-drop", "upload-preview"]
 }
