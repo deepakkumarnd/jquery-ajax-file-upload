@@ -13,6 +13,14 @@
   list-style: none; }
   .upload li:last-child {
     border-bottom: 1px dashed silver; }
+  .upload li .fileinfo {
+    color: silver;
+    font-size: 14px; }
+    .upload li .fileinfo span img {
+      width: 100px;
+      height: auto; }
+    .upload li .fileinfo .delete-link {
+      color: #307ea9; }
 .upload .progressbar {
   background: silver;
   float: right;
@@ -26,8 +34,3 @@
   cursor: pointer;
   font-size: 15px;
   text-decoration: underline; }
-.upload .filemeta {
-  color: silver;
-  font-size: 14px; }
-  .upload .filemeta .fileinfo .delete-link {
-    color: #307ea9; }

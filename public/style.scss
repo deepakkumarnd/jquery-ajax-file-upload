@@ -23,6 +23,18 @@ $lighter-text-color:   #C0C0C0;
     &:last-child {
       border-bottom: 1px dashed $lighter-text-color;
     }
+
+    .fileinfo {
+      color: $lighter-text-color;
+      font-size: 14px;
+      span {
+        img {
+          width: 100px;
+          height: auto;
+        }
+      }
+      .delete-link { color: #307ea9; }
+    }
   }
 
   .progressbar {
@@ -42,15 +54,5 @@ $lighter-text-color:   #C0C0C0;
     cursor: pointer;
     font-size: 15px;
     text-decoration: underline;
-  }
-
-  .filemeta {
-    color: $lighter-text-color;
-    font-size: 14px;
-    .filename {}
-    .fileinfo {
-      span {}
-      .delete-link { color: #307ea9; }
-    }
   }
 }
