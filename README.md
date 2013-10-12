@@ -10,6 +10,8 @@ Load the script files first. In html page create a target element.
 Add the following code in your javascript
 
      $(".uploader").ajaxUpload({
+        preview: true,
+        ...
         callback: function(data) {
           // data containes json response from server
         }
@@ -24,6 +26,24 @@ Add the following code in your javascript
     preview : true                // add a preview for the selected image file
     callback:  function(data) {}  // do something after each file upload, the data will be the data returned form server.
 
+eg:
+
+    <html>
+        <head>
+            <title>Ajax Multi File Upload Plugin</title>
+            <link rel="stylesheet" type="text/css" href="jquery_ajax_upload/style.css" />
+            <script type="text/javascript" src="jquery_ajax_upload/jquery2.min.js"></script>
+            <script type="text/javascript" src="jquery_ajax_upload/jquery.ajaxupload.js"></script>
+            <script>
+                $(function(){
+                    $(".uploader").ajaxUpload();
+                });
+            </script>
+        </head>
+        <body>
+            <div class="uploader"></div>
+        </body>
+    </html>
 
 Ajax upload comes with a simple scss (css) file you are free to override the default styling.
 A new li is added for each selected file. The DOM structure created by the plugin is as follows
@@ -45,25 +65,6 @@ A new li is added for each selected file. The DOM structure created by the plugi
             ...
         </ul>
     </div>
-
-eg:
-
-    <html>
-        <head>
-            <title>Ajax Multi File Upload Plugin</title>
-            <link rel="stylesheet" type="text/css" href="jquery_ajax_upload/style.css" />
-            <script type="text/javascript" src="jquery_ajax_upload/jquery2.min.js"></script>
-            <script type="text/javascript" src="jquery_ajax_upload/jquery.ajaxupload.js"></script>
-            <script>
-                $(function(){
-                    $(".uploader").ajaxUpload();
-                });
-            </script>
-        </head>
-        <body>
-            <div class="uploader"></div>
-        </body>
-    </html>
 
 ## How to test it?
 
