@@ -1,10 +1,9 @@
 class Uploader
   constructor: (@container, @opts) ->
-    browse    = "<a href='javascript:void(0);' class='#{@opts.browse_class}'>#{@opts.browse_text}</a>"
+    browse    = "<a href='javascript:void(0);' class='browse'>#{@opts.browse_text}</a>"
     filefield = "<input type='file' hidden multiple=#{@opts.multiple}></input>"
-    list      = "<ul class='#{@opts.list_class}'></ul>"
-    choose_file = browse
-    choose_file = "<div class='droparea'>#{choose_file}</div>" if @opts.drag_and_drop
+    list      = "<ul class='list'></ul>"
+    choose_file = (if @opts.drag_and_drop then "<div class='droparea'>#{browse}</div>" else browse)
     choose_section = "#{choose_file}#{filefield}#{list}"
 
     @container.addClass("upload")
@@ -48,10 +47,19 @@ class Uploader
 
     $(files).each (i, file) =>
       item = """<li><div class='progressbar'><div class='progress' style='width:0%;'></div></div>
-                <div class='filemeta'><div class='filename'>#{file.name}</div>
-                <div class='fileinfo'><span>#{@toSize(file.size)}</span>&nbsp;&mdash;&nbsp;</div></div></div></li>"""
+                <div class='fileinfo'><span class='preview'></span><span class='filename'>#{file.name}</span>
+                <span>#{@toSize(file.size)}</span>&nbsp;&mdash;&nbsp;</div></div></li>"""
       @list.append(item)
+      preview = $(".preview").last()
+      @setPreview(file, preview) if @opts.preview
       @upload(file, @list.children().last())
+
+  setPreview: (file, preview) =>
+    return unless file.type.match("image.*")
+    reader = new FileReader()
+    reader.onload = (evt) ->
+      preview.html("<img src='#{evt.target.result}'></img>")
+    reader.readAsDataURL(file)
 
   toSize: (size) ->
     units = ["KB", "MB", "GB"]
@@ -102,10 +110,8 @@ $.fn.ajaxUpload = (options) ->
 $.fn.ajaxUpload.default_options =
   upload_path: "/"
   browse_text: "browse"
-  browse_class: "browse"
-  list_class: "list"
-  progress_class: "progressbar"
   drag_and_drop: false
   multiple: true
+  preview: false
   callback: (data) ->
     console.log("no callbacks")
