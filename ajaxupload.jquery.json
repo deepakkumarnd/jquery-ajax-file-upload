@@ -1,0 +1,22 @@
+{
+  "name": "ajaxupload",
+  "title": "jQuery Ajax Upload",
+  "description": "A simple and light weight multifile ajax based file upload plugin",
+  "version": "0.9.0",
+  "homepage": "https://github.com/42races/jquery-ajax-file-upload",
+  "author": {
+    "name": "Deepak Kumar",
+    "url": "blog.42races.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/42races/jquery-ajax-file-upload.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
+  "keywords": ["upload", "ajaxupload", "jquery ajax upload", "multi file upload", "drag and drop upload", "upload preview"]
+}
