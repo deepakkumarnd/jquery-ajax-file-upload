@@ -18,5 +18,5 @@
       "url": "http://opensource.org/licenses/MIT"
     }
   ],
-  "keywords": ["upload", "ajaxupload", "jquery ajax upload", "multi file upload", "drag and drop upload", "upload preview"]
+  "keywords": ["upload", "ajaxupload", "jquery-ajax-upload", "multiupload", "drag-and-drop", "upload-preview"]
 }
