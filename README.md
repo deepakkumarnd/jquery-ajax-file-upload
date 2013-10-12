@@ -72,11 +72,16 @@ There is no ruby or sinatra dependency I just used it to simulate a server to te
 
 1. Install ruby
 2. Install sinatra
-    gem install sinatra
+        
+        gem install sinatra
+
 3. clone the repo
-    git clone git@github.com:42races/jquery-ajax-file-upload.git
+
+        git clone git@github.com:42races/jquery-ajax-file-upload.git
+
 4. cd to the repo directory
 5. run the command
-     ruby app.rb
 
-now just go to the url http://localhost:4567/ on your browser, A demo along with documentation is available on this page.
+        ruby app.rb
+
+now just go to the url [http://localhost:4567/](http://localhost:4567/) on your browser, A demo along with documentation is available on this page.
