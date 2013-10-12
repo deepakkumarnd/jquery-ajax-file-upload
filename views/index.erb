@@ -6,29 +6,88 @@
     <script type="text/javascript" src="jquery.ajaxupload.js"></script>
   </head>
 
+  <style type="text/css">
+    code {
+      display: block;
+      background: #2b2b2b;
+      color: #d1d1d1;
+      padding: 5px;
+      margin: 10px;
+      width: 500px;
+    }
+  </style>
+
   <body>
     <h1>jQuery Ajax Upload Plugin</h1>
 
     <div class="section">
       <h2>Default</h2>
+      <code>$(".upload-1").ajaxUpload();</code>
+      <small>demo</small>
       <div class="upload-1"></div>
     </div>
 
     <div class="section">
-      <h2>Drag and Drop</h2>
+      <h2>Single file upload</h2>
+      <code>$(".upload-1").ajaxUpload({ multiple: false });</code>
+      <p>By default the plugin can allows to select multiple files, you may override it using multiple option</p>
+      <small>demo</small>
       <div class="upload-2"></div>
     </div>
 
     <div class="section">
-      <h2>Preview</h2>
-      <p>For images you can set a preview</p>
+      <h2>Specify upload path</h2>
+      <p>By default the plugin will send an ajax post request to the path /. You can specify some other path using upload_path option.</p>
+      <code>$(".upload-1").ajaxUpload({ upload_path: "/upload" });</code>
+      <small>demo</small>
       <div class="upload-3"></div>
+    </div>
+
+    <div class="section">
+      <h2>Add Drag and Drop</h2>
+      <code>$(".upload-2").ajaxUpload({ drag_and_drop: true });</code>
+      <small>demo</small>
+      <div class="upload-4"></div>
+    </div>
+
+    <div class="section">
+      <h2>Add Preview</h2>
+      <p>For images you can set a preview</p>
+      <code> $(".upload-3").ajaxUpload({ preview: true });</code>
+      <small>demo</small>
+      <div class="upload-5"></div>
+    </div>
+
+    <div class="section">
+      <h2>Drag and Drop With Preview</h2>
+      <p>You can also change the default "browse" text shown to choose file</p>
+<code><pre>
+$(".upload-3").ajaxUpload({
+  preview: true,
+  drag_and_drop: true,
+  browse_text: "click or drag and drop your files here"
+});
+</pre></code>
+      <small>demo</small>
+      <div class="upload-6"></div>
+    </div>
+
+    <div class="section">
+      <h2>Callback</h2>
+      <p>You may do some processing after uploading each image, once the ajax upload is complete for each file a callback can be executed.<p>
+      <code>$(".upload-1").ajaxUpload({ callback: function(data) { /* write your callback code here */}});</code>
+      <small>demo</small>
+      <div class="upload-7"></div>
     </div>
 
     <script>
       $(".upload-1").ajaxUpload();
-      $(".upload-2").ajaxUpload({ drag_and_drop: true });
-      $(".upload-3").ajaxUpload({ preview: true });
+      $(".upload-2").ajaxUpload({ multiple: false });
+      $(".upload-3").ajaxUpload({ upload_path: "/upload" });
+      $(".upload-4").ajaxUpload({ drag_and_drop: true });
+      $(".upload-5").ajaxUpload({ preview: true });
+      $(".upload-6").ajaxUpload({ drag_and_drop: true, preview: true, browse_text: "click or drag and drop your files here" });
+      $(".upload-7").ajaxUpload({ callback: function(data) { alert("Running callback");}});
     </script>
   </body>
 </html>

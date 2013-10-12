@@ -5,17 +5,17 @@
 
 Load the script files first. In html page create a target element.
 
-     <div class="uploader"></div>
+    <div class="uploader"></div>
 
 Add the following code in your javascript
 
-     $(".uploader").ajaxUpload({
+    $(".uploader").ajaxUpload({
         preview: true,
         ...
         callback: function(data) {
           // data containes json response from server
         }
-     });
+    });
 
 # Options supported
 
@@ -68,6 +68,8 @@ A new li is added for each selected file. The DOM structure created by the plugi
 
 ## How to test it?
 
+There is no ruby or sinatra dependency I just used it to simulate a server to test this plugin.
+
 1. Install ruby
 2. Install sinatra
     gem install sinatra
@@ -77,4 +79,4 @@ A new li is added for each selected file. The DOM structure created by the plugi
 5. run the command
      ruby app.rb
 
-now just go to the url http://localhost:4567/ on your browser
+now just go to the url http://localhost:4567/ on your browser, A demo along with documentation is available on this page.
