@@ -5,10 +5,19 @@ $lighter-text-color:   #C0C0C0;
   .droparea {
     display: block;
     border: 1px dashed $lighter-text-color;
-    width: 200px;
+    width: 500px;
     min-height: 150px;
     text-align: center;
     background-color: rgb(252, 247, 247);
+
+    .browse {
+      color: $theme-color;
+      cursor: pointer;
+      font-size: 15px;
+      text-decoration: underline;
+      position: relative;
+      top: 68px;
+    }
   }
 
   ul {
